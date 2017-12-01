@@ -102,7 +102,7 @@ print('Created entry for Sienna...')
 # These two properties are used as a primary key to index the Table. This makes queries much quicker.
 
 coffee = Entity()
-coffee.PartitionKey = 'clothingstore'
+coffee.PartitionKey = 'coffeestore'
 coffee.RowKey = '004'
 coffee.brand = 'Senthilvs'
 coffee.flavor = 'Arabica'
@@ -113,7 +113,7 @@ print('Created entry for a Senthilvs Arabica...\n')
 time.sleep(1)
 
 coffee = Entity()
-coffee.PartitionKey = 'clothingstore'
+coffee.PartitionKey = 'coffeestore'
 coffee.RowKey = '005'
 coffee.brand = 'McKesson'
 coffee.flavor = 'Deep Azure Flavor'
@@ -130,15 +130,15 @@ raw_input('Press Enter to continue...')
 
 # In this query, you define the partition key to search within, and then which properties to retrieve
 # Structuring queries like this improves performance as your application scales up and keeps the queries efficient
-items = table_service.query_entities('randomitemswk6', filter="PartitionKey eq 'pizzamenu'", select='description,cost')
+items = table_service.query_entities('randomitemswk6', filter="PartitionKey eq 'dealerinventory'", select='make,model')
 for item in items:
-    print('Name: ' + item.description)
-    print('Cost: ' + str(item.cost) + '\n')
+    print('Make: ' + item.make)
+    print('Model: ' + str(item.model) + '\n')
 
-items = table_service.query_entities('randomitemswk6', filter="PartitionKey eq 'clothingstore'", select='description,price')
+items = table_service.query_entities('randomitemswk6', filter="PartitionKey eq 'coffeestore'", select='brand,flavor')
 for item in items:
-    print('Name: ' + item.description)
-    print('Price: ' + str(item.price) + '\n')
+    print('Brand: ' + item.brand)
+    print('Flavor: ' + str(item.flavor) + '\n')
 
 time.sleep(1)
 
